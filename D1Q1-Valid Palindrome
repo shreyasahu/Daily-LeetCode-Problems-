@@ -9,4 +9,3 @@ public:
         return (str==string(str.rbegin(),str.rend()));  
     }
 };
-
