@@ -1,3 +1,4 @@
+//Given input is a sentence here with lot of words including spaces 
 //https://leetcode.com/problems/valid-palindrome/
 class Solution {
 public:
