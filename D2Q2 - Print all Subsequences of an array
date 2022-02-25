@@ -27,3 +27,6 @@ public:
         return vec;
     }  
 };
+
+Time complexity - O(2^n) (for a every element there is a choice to pick or not pick )
+Space Complexity- O(n) (in worst case at a time all elements in an array could be present)
