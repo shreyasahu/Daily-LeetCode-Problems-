@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/combination-sum/
+class Solution {
+public:
+    
+   void sqs(int ind,vector<vector<int> > &vec,vector <int> &ds,vector<int>&nums,int n,int target)
+    {
+         if (ind==n)       //Base case to stop the recursion will be the either 
+         {                   // index reaches to size of array or our target gets complete
+             if(target==0)
+             {vec.push_back(ds);}
+              return;
+         }
+         
+         if(nums[ind]<=target)   //for picking the element  
+         {
+              ds.push_back(nums[ind]);
+              sqs(ind,vec,ds,nums,n,target-nums[ind]);
+              ds.pop_back();   //this needs to be done as in our 
+                            // ds all elements will be there 
+         }     
+        
+         sqs(ind+1,vec,ds,nums,n,target); // for not picking the element 
+    }
+    
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
+    {
+        int n = candidates.size();
+        vector <vector<int>> vec;
+        vector<int>ds;
+        sqs(0,vec,ds,candidates,n,target);
+        return vec;
+    }
+};
