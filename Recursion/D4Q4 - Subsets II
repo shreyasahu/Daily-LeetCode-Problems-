@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/subsets-ii/
+//Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+// The solution set must not contain duplicate subsets. Return the solution in any order.
+//Input: nums = [1,2,2]
+//Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+
+//Approach 
+// Here the breaking point of recursion will be i<nums.size(), i!=ind is written so that we pick the first element in array [1,1,2,2]  element at 0th and 2nd index will 
+// be considered.
+
+class Solution {
+public:
+    void sqs (int ind, vector<vector<int>> &ans, vector<int> &ds, vector<int> &nums)
+    {
+        ans.push_back(ds); 
+        for(int i=ind;i<nums.size();i++)
+        {
+            if(i!=ind && nums[i]==nums[i-1])  //for not taking the repeated element 
+            continue;
+            ds.push_back(nums[i]);
+            sqs(i+1,ans,ds,nums);
+            ds.pop_back();
+        }           
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+     
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector <int> ds;
+        sqs(0,ans,ds,nums);
+        return ans;
+    }
+};
