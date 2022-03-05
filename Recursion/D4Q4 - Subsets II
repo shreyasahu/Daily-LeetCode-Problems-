@@ -31,3 +31,35 @@ public:
         return ans;
     }
 };
+
+=====================================================================================================================
+
+// Another Approach 
+
+class Solution {
+public:
+    
+    void sqs (int ind, vector<vector<int>> &ans, vector<int> &ds, vector<int> &nums)
+    {
+        if(ind>=nums.size())
+        {
+            if (find(ans.begin(), ans.end(), ds)== ans.end()) // for checking if that combination (vector) is already present in 2d ans vector 
+            {
+                ans.push_back(ds);
+            }
+            return;
+        }
+        ds.push_back(nums[ind]);
+        sqs(ind+1,ans,ds,nums);  // for picking the element 
+        ds.pop_back();
+        sqs(ind+1,ans,ds,nums);    // for not picking the element
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+     
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector <int> ds;
+        sqs(0,ans,ds,nums);
+        return ans;
+    }
+};
