@@ -18,11 +18,46 @@ Output: 4
 
 Solution-
 
+USING MAX HEAP - BY DEFAULT PRIORITY QUEUE MAX HEAP BANATA HAI 
+
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue <int> p;
+        int ans=0,i=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            p.push(nums[i]);
+        }
+        
+        while (!p.empty())
+        {
+            if(i==k)
+            {
+                ans=p.top();
+                break;
+            }
+            i++;
+            p.pop();
+        }
+        
+        return ans;
+    }
+};
+
+
+
+------------------------------------------------------------------------------
+
+USING MIN HEAP 
+
+
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) 
     {
-        priority_queue <int, vector<int>, greater<int>> p; //made a priority queue //here MIN HEAP CREATE KIYA HAI 
+        priority_queue <int, vector<int>, greater<int>> p; //here MIN HEAP CREATE KIYA HAI - AISE BANATE HAI 
         int ans=0, i=1;
         int n=nums.size();
        for(int i=0;i<nums.size();i++)
@@ -48,3 +83,5 @@ public:
 };
 
 Time Complexity- O(n+klogn)
+
+
