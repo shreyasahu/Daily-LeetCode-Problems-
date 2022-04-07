@@ -1,0 +1,88 @@
+https://leetcode.com/problems/majority-element-ii/
+
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: [3]
+Example 2:
+
+Input: nums = [1]
+Output: [1]
+Example 3:
+
+Input: nums = [1,2]
+Output: [1,2]
+ 
+
+Constraints:
+
+1 <= nums.length <= 5 * 104
+-109 <= nums[i] <= 109
+
+
+Solution-
+
+if an array we need to find an element whose occurence is >n/3
+
+therefore at max there will be 2 majority elements 
+for eg if array has 8 elements then , 3,3,2-> 2 majority
+therefore we will have to maintain a counter for 2 majority elements and follow up with majority element 1 question
+
+-----------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var majorityElement = function(nums) {
+    let ele1=-1,ele2=-1,count1=0,count2=0;
+    for(let i=0;i<nums.length;i++)
+        {
+            if(ele1==nums[i])
+                count1++;
+            else if (ele2==nums[i])
+                count2++;
+            
+            else if (count1==0){
+                ele1=nums[i];
+                count1=1;
+            }
+            
+            else if (count2==0){
+                ele2=nums[i];
+                count2=1;
+            }
+            else {
+                count1--;
+                count2--;
+            }
+                
+        }
+    let temp=[];
+    count1=0,count2=0;
+    let x=Math.floor(nums.length/3);
+    for(let i=0;i<nums.length;i++){             // again counting as count above doesn't necessarily have exact count (it might cancel each other so need to again count)
+        if (ele1==nums[i])
+            count1++;
+        else if(ele2==nums[i])
+            count2++;
+            
+    }
+   if(count1>x){
+       temp.push(ele1);
+   }
+   if(count2>x){
+       temp.push(ele2);
+   }
+    
+    return temp;
+     
+};
+
+T.C.- O(n)
+S.C.- O(1)
+
