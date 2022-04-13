@@ -17,20 +17,21 @@ Output: []
 
 
 Solution-
-
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(),nums.end());
-        vector<vector<int>> ans;
-        int n=nums.size();
-        int target=0;
-        for(int i=0;i<n;i++)
+         int n=nums.size(),target=0;
+         vector<vector<int>> ans;
+        
+         for(int i=0;i<n-2;i++)
         {
-            int left=i+1,right=n-1;
+          
+         if(i==0||(i>0 && nums[i]!=nums[i-1])){      //processing duplicates of i
+             int left=i+1,right=n-1;
             while(left<right)
             {
-                 while(i<n-1 && nums[i]==nums[i+1]) i++; //for escaping duplicates 
+                 
                 int sum=nums[left]+nums[right];
                 if(sum<target-nums[i])
                     left++;
@@ -38,15 +39,21 @@ public:
                     right--;
                 else
                 {
-                   vector<int> s={nums[i],nums[left],nums[right]};
+                    vector<int> s={nums[i],nums[left],nums[right]};
                     ans.push_back(s);
-                    while(left<right && nums[left]==s[1])  {left++;}
-                    while(left<right && nums[right]==s[2]) { right--;}
+                    while(left<right && nums[left]==s[1])  {left++;}          //processing duplicates of left
+                    while(left<right && nums[right]==s[2]) { right--;}         //processing duplicates of right
+                    // left++; right--;
                 }
-            }
+             }
+         }
+            
         }
         return ans;
     }
 };
 
+
 T.C. - O(n2)
+S.C- O(1)
+
