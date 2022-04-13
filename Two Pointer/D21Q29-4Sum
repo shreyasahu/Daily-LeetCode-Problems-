@@ -1,0 +1,78 @@
+//https://leetcode.com/problems/4sum/
+
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+Example 2:
+
+Input: nums = [2,2,2,2,2], target = 8
+Output: [[2,2,2,2]]
+
+Solution-
+
+1)sort the array
+2)run 2 loops i and j
+3) and then think to apply 2 pointer left and right
+4) take care of duplicates in program (directly jump over duplicates)
+
+ps - you can't directly delete the duplicates, testcase will fail for eg.   
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+
+here [-1,0,0,1] -> 2 times 0 is coming
+
+you can't use find(v.begin(),v.end(),a)!=v.end(); for checking for duplicates in c++ , it will give TLE
+
+-----------------------------------------------------
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+       vector<vector<int>> ans;
+       if(nums.empty())
+           return ans;
+       sort(nums.begin(),nums.end()); 
+       int n=nums.size();
+       
+       for(int i=0;i<n-2;i++)                                 
+       { 
+           if(i==0||(i>0 && nums[i]!=nums[i-1])){               //processing duplicates of i (one of the no)
+           for(int j=i+1;j<n-1;j++)   
+           { 
+               
+               int target2=target-nums[i]-nums[j];
+               int left=j+1, right=n-1;
+               while(left<right){
+                   int sum=nums[left]+nums[right];
+                   if(target2<sum)
+                       right--;
+                   else if(target2>sum)
+                       left++;
+                   else{
+                       vector <int> temp = {nums[left],nums[right],nums[i],nums[j]};
+                       ans.push_back(temp);
+                       while(left<right && nums[left]==temp[0])  {left++;}         //Processing the duplicates of left (one of the no)
+                       while(left<right && nums[right]==temp[1]) {right--;}        ////Processing the duplicates of right (no of the no)
+                   }      
+                
+                }
+               while(j + 1 < n && nums[j + 1] == nums[j]) j++;   //processing duplicates of j (one of the no)
+           }   
+         }
+       }
+        return ans;
+    }
+};
+
+
+T.C- O(n3)
+s.C. - O(1)
