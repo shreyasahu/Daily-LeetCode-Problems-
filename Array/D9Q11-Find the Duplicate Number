@@ -36,10 +36,12 @@ fast and slow pointer are meeting at any point on the cycle and they will only m
 fast pointer is a multiple of the length of the cycle .
 
 a --> nc  (c is the length of the cycle)
+-----------------------------------------------------------------------
+Approach-2 - num of n numbers - n(n+1)/2-sum of array elements -THIS APPROACH WON'T WORK AND WILL FAIL FOR 
+TESTCASE - [2,2,2,2,2,2]
+RETURN 2 so here this approach won't work 
 
-
-
-
+--------------------------------------------------------------------------------------------------
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) 
