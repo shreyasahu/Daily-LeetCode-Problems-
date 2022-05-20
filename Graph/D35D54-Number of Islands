@@ -26,6 +26,8 @@ Input: grid = [
 ]
 Output: 3
 
+// will be solved using concept of DFS
+
 class Solution {
 public:
      void markIsland(vector<vector<char>> &matrix,int x,int y,int row,int col){
