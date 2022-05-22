@@ -1,0 +1,44 @@
+//https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
+
+Given a string s, return the length of the longest substring that contains at most two distinct characters.
+
+ 
+
+Example 1:
+
+Input: s = "eceba"
+Output: 3
+Explanation: The substring is "ece" which its length is 3.
+Example 2:
+
+Input: s = "ccaabbb"
+Output: 5
+Explanation: The substring is "aabbb" which its length is 5.
+
+SOLUTION-
+push the elements into the stack, and find the maxlength till stack size is less than 2. Once stack size gets greater than 2 , then
+decrease the frequency of innermost left element , and if the frequency gets 0 then delete the element itself and find the maxlength.
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        int left=0,max_len=0;
+        unordered_map<char,int> umap;
+        for(int i=0;i<s.size();i++){
+            umap[s[i]]++;
+            while(umap.size()>2){
+                umap[s[left]]--;
+                if(!umap[s[left]])
+                    umap.erase(s[left]);
+                left++;
+            }
+            max_len=max(max_len,i-left+1);
+        }
+        return max_len;
+    }
+};
+
+
+Time Complexity- O(N)
+Space Complexity- O(1)
