@@ -54,3 +54,20 @@ public:
     }
 };
 
+solution-2 (RECURSION)
+
+  void build(TreeNode* n, vector<vector<int>>& R, int d) {
+        if (!n) return;
+        if (d == R.size()) R.push_back(vector<int>());
+        R[d].push_back(n->val);
+        build(n->left, R, d + 1);
+        build(n->right, R, d + 1);
+    }
+    
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> R;
+        build(root, R, 0);
+        return R;
+    }
+};
+
