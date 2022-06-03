@@ -1,0 +1,48 @@
+//https://leetcode.com/problems/meeting-rooms-ii/
+
+Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], 
+return the minimum number of conference rooms required.
+
+Example 1:
+
+Input: intervals = [[0,30],[5,10],[15,20]]
+Output: 2
+Example 2:
+
+Input: intervals = [[7,10],[2,4]]
+Output: 1
+ 
+
+Constraints:
+
+1 <= intervals.length <= 104
+0 <= starti < endi <= 106
+------------------------------------------------------------------------------------------
+Algorithm
+1) Sort the intervals based on starting time
+2) take priority queue- min heap add starting interval - only insert end time 
+3) Traverse over other intervals and if the top of priority queue means ending time is less than incoming interval simply pop 
+4) and we need to insert in every case 
+
+-----------------------------------------------------------------------------------------
+
+
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+         if(intervals.size()==0)
+            return 0;
+        sort(intervals.begin(),intervals.end());
+        priority_queue <int, vector<int>, greater<int>> pq;
+        pq.push(intervals[0][1]);
+       for(int i=1;i<intervals.size();i++){
+           if(intervals[i][0]>=pq.top())
+           {
+               pq.pop();
+           }
+           pq.push(intervals[i][1]);
+       }
+       return pq.size();
+    }
+};
+
