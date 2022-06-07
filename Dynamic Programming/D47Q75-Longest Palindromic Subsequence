@@ -1,0 +1,43 @@
+//https://leetcode.com/problems/longest-palindromic-subsequence/
+
+Given a string s, find the longest palindromic subsequence's length in s.
+
+A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+
+Example 1:
+
+Input: s = "bbbab"
+Output: 4
+Explanation: One possible longest palindromic subsequence is "bbbb".
+Example 2:
+
+Input: s = "cbbd"
+Output: 2
+Explanation: One possible longest palindromic subsequence is "bb".
+ 
+Constraints:
+1 <= s.length <= 1000
+s consists only of lowercase English letters.
+
+class Solution {
+public:
+    int lps(string &s,vector<vector<int>> &dp,int i,int j){
+        if(i>j)
+            return 0;
+        if(i==j)
+            return dp[i][j]=1;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        if(s[i]==s[j])
+            return dp[i][j] = 2+lps(s,dp,i+1,j-1);
+        return dp[i][j]=max(lps(s,dp,i+1,j),lps(s,dp,i,j-1));
+    }
+    
+    int longestPalindromeSubseq(string s) {
+        int m=s.size();
+        vector<vector<int>> dp(m,vector<int> (m,-1));
+        int i=0,j=s.size()-1,count=0;
+        return lps(s,dp,i,j);
+    }
+};
+
