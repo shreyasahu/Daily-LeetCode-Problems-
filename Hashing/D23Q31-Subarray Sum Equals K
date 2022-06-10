@@ -90,6 +90,19 @@ Step 6:
  
  
 ---------------------------------------------------------------------------------------------- 
+
+Testcase - For understanding map1[sum-k]
+[3,4,7,2,-3,1,4,2,1] k=7
+3:1
+7:1  count=1
+14:1  count=2  => 14:2  count=3   =. 14:3 Count=6
+16:1  count=2
+13:1  count=2 => 13:2 count=5
+now we need to increase the count of 14 means 14:2
+18:1 count=4
+20:1 
+21:1 
+------------------------------------------------------
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
