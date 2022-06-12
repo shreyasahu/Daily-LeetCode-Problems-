@@ -1,0 +1,94 @@
+Q. JS newbie A wants to check if he can reach out to a React expert 'B' using his network of React developers. if he can then return 
+1 else return 0.
+
+INPUT FORMAT-
+
+Total members in react developer Community = N
+
+Memberid=N1
+Memberid=N2
+Memberid=N3
+Memberid=N4
+
+Total possible edges = E
+
+< follower 1 (member ID) <following 1 (member ID)> = u1v1
+< follower 2 (member ID) <following 2 (member ID)> = u2v2
+< follower 3 (member ID) <following 3 (member ID)> = u3v3
+< follower 4 (member ID) <following 4 (member ID)> = u4v4
+
+...............
+
+< follower N (member ID) <following N (member ID)> = unvn
+
+Follower=A
+Follower=B
+
+OUTPUT FORMAT
+
+If A can reach B then output is 1 else 0
+
+sample testcase -
+
+4 - no of vertex
+2
+5
+7
+9
+4  - no of edges 
+2 9
+7 2
+7 9
+9 5
+7 - source 
+9 - destination
+
+SOLUTION------------------------------------------
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+bool dfs(int src,int dst,vector<int> adj[],vector<int>& visited){
+	if(src==dst)
+	return true;
+  visited[src]=1;
+  for(auto it:adj[src]){
+    if(visited[it]==0)
+      if(dfs(it,dst,adj,visited)) return true;
+  }
+  return false;
+}
+
+int main() {
+  int V;
+  cin>>V;
+  vector<int> vt;
+  for(int i=0;i<V;i++){
+	  int vertex;
+	  cin>>vertex;
+	vt.push_back(vertex);
+  }
+  int edges;
+  cin>>edges;
+  vector<int> adj[100005];
+  for(int i=0;i<edges;i++){
+       int u,v;
+       cin>>u>>v;
+	   adj[u].push_back(v);
+  }
+  int a,b;
+  cin>>a>>b;
+//   for(auto it:adj){
+// 	  for(auto it1:it){
+//          cout<<it1<<" ";
+// 	  }
+// 	  cout<<"\n";
+//   }
+  vector<int> visited(100005,0);
+  //cout<<dfs(a,b,adj,visited);
+  
+  if(dfs(a,b,adj,visited)==true) cout<<1;
+  else  cout<<0;
+  return 0;
+}
