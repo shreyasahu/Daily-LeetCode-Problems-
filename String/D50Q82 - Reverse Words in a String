@@ -36,6 +36,20 @@ There is at least one word in s.
 
 Follow-up: If the string data type is mutable in your language, can you solve it in-place with O(1) extra space?
 
+class Solution {
+public:
+    string reverseWords(string s) {
+        stringstream s1(s);   //stringstream breaks the word into array of words ["the","sky","is","blue"]
+        string word,ans="";
+        while(s1>>word){      //fetching word by word 
+            ans=word+" "+ans;
+        }
+        ans.pop_back();  //since at the last there should not be any space 
+        return ans;
+       
+    }
+};
+
 
 
 class Solution {
@@ -49,3 +63,5 @@ public:
         return ans.substr(0,ans.length()-1);
     }
 };
+
+
