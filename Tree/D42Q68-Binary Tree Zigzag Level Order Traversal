@@ -17,12 +17,12 @@ Output: []
 
 class Solution {
  public:
-    void build(TreeNode* n, vector<vector<int>>& R, int d) {
+    void build(TreeNode* n, vector<vector<int>>& v, int level) {
         if (!n) return;
-        if (d == R.size()) R.push_back(vector<int>());
-        R[d].push_back(n->val);
-        build(n->left, R, d + 1);
-        build(n->right, R, d + 1);
+        if (level == v.size()) v.push_back(vector<int>());
+        v[level].push_back(n->val);
+        build(n->left, v, level + 1);
+        build(n->right, v, level + 1);
     }
     
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
