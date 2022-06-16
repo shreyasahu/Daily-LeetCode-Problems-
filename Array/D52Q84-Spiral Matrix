@@ -1,0 +1,46 @@
+
+
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+1 2 3 
+4 5 6 
+7 8 9 
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int left=0,top=0,direction=1;
+        int right=matrix[0].size()-1,down=matrix.size()-1;
+       vector<int> result;
+        while(left<=right && top<=down){
+            if(direction==1){
+                for(int i=left;i<=right;i++) result.push_back(matrix[top][i]);
+                direction=2;
+                top++;
+            }
+            
+            else if(direction==2){
+                 for(int i=top;i<=down;i++)  result.push_back(matrix[i][right]);
+                direction=3;
+                right--;
+            }
+            
+           else if(direction==3){
+                 for(int i=right;i>=left;i--) result.push_back(matrix[down][i]);
+                direction=4;
+                down--;
+            }
+             else if(direction==4){
+                 for(int i=down;i>=top;i--) result.push_back(matrix[i][left]);
+                direction=1;
+                left++;
+            }
+            
+        } 
+        return result;
+    }
+};
+
