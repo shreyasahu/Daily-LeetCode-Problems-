@@ -1,0 +1,52 @@
+https://leetcode.com/problems/contiguous-array/
+
+Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.
+
+ 
+
+Example 1:
+
+Input: nums = [0,1]
+Output: 2
+Explanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.
+Example 2:
+
+Input: nums = [0,1,0]
+Output: 2
+Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
+ 
+
+Constraints:
+
+1 <= nums.length <= 105
+nums[i] is either 0 or 1.
+
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++) nums[i]==0?nums[i]=-1:nums[i]=1;
+       
+        int sum=0,maxlen=0,endindex=0;
+        unordered_map<int,int> mp;
+        for(int i=0;i<nums.size();i++){
+            sum=sum+nums[i];
+            if(sum==0){
+                maxlen=i+1;
+                endindex=i;
+            }
+            if(mp.find(sum)!=mp.end()){   // we are doing this because agr sum repeat hua hai matlab there
+                if(maxlen<i-mp[sum]){     // is a subarray in there consisting equal no of zeroes and ones 
+                    maxlen=i-mp[sum];     // testcase [1,1,1,-1,-1,1]  no where sum will get zero but subarray is there  1,-1,-1,1
+                    endindex=i;
+                }
+               
+            }
+            else
+             mp[sum]=i;
+        }
+        return maxlen;
+    }
+};
+
+T.C- O(N)
+S.C.- O(N)
