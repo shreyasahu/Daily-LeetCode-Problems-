@@ -9,6 +9,26 @@ You must solve this problem without using the library's sort function.
 Input: nums = [2,0,2,1,1,0]
 Output: [0,0,1,1,2,2]
 
+---------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        for(int i=0,j=nums.size()-1,mid=0;i<=j;){
+            if(nums[i]==2){
+                swap(nums[i],nums[j--]);
+            }
+                
+            else if (nums[i]==0){
+                swap(nums[i++],nums[mid++]);
+            }
+            else if(nums[i]==1)
+                i++;
+        }
+    }
+};
+
+---------------------------------------------------------------------------------------
 // Approach is count the no of 0's 1's and 2's then put in the array accordingly 
 
 class Solution {
