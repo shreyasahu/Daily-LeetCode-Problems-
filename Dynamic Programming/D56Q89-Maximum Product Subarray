@@ -44,8 +44,8 @@ public:
         int res=nums[0],currMax=nums[0],currMin=nums[0];
         for(int i=1;i<n;i++){
            int curr=nums[i];
-           int tempMax=max(currMax,max(curr,max(curr*currMax,currMin*curr))); //stored in tempmax bcoz currmin shi se calculate nhi ho pata 
-            currMin=min(currMin,min(curr,min(curr*currMax,currMin*curr)));     // kyuki currmax ki nayi value update ho jaati , currmin galat nikalta 
+           int tempMax=max(curr,max(curr*currMax,currMin*curr)); //stored in tempmax bcoz currmin shi se calculate nhi ho pata
+            currMin=min(curr,min(curr*currMax,currMin*curr));  // kyuki currmax ki nayi value update ho jaati , currmin galat nikalta 
             currMax=tempMax;
             res=max(currMax,res);
         }
