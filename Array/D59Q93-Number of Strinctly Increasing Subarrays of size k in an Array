@@ -1,0 +1,43 @@
+Question : Count the number of strictly increasing subarray of a specified size k in an array of size N .
+
+Eg: Array= [ 5,3,5,7,8] and k=3 , The answer is 2 as [3,5,7] and [5,7,8] are the answer.
+ 
+
+Input: arr[] = {1, 2, 3, 2, 5}, K = 2 
+Output: 3 
+{1, 2}, {2, 3} and {2, 5} are the increasing 
+subarrays of length 2.
+
+
+Input: arr[] = {1, 2, 3, 2, 5}, K = 1 
+Output: 5 
+ -----------------------------------------------------------------------------------------------
+ try running for input 
+ 
+ 1 2 3 4 2 3 4 5 6 7 8 
+ for k=2 and k=5 
+ 
+ --------------------------------------------------------------------------------------
+ public static int countHighlyProfitableMonths(List stockPrices, int k) {
+if(k==0 || k>stockPrices.size()){
+     return 0;
+}
+int ans=0;
+int currIn=1;
+for (int i = 1; i < stockPrices.size(); i++) {
+    if (stockPrices.get(i - 1) < stockPrices.get(i)) {
+         currIn++;
+    } else if (currIn >= k) {
+        ans += currIn - k + 1;
+        currIn = 1;
+    } else {
+        currIn = 1;
+    }
+}
+if(currIn>=k) {
+  ans+=currIn-k+1;
+}
+  return ans;
+}
+
+ 
