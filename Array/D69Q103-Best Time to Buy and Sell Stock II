@@ -8,8 +8,7 @@ the stock at any time. However, you can buy it then immediately sell it on the s
 Find and return the maximum profit you can achieve.
 
  
-
-Example 1:
+ Example 1:
 
 Input: prices = [7,1,5,3,6,4]
 Output: 7
@@ -34,7 +33,7 @@ Constraints:
 1 <= prices.length <= 3 * 104
 0 <= prices[i] <= 104
 
-
+// Approach - APPLY SLIDING WINDOW --->
 
 class Solution {
 public:
