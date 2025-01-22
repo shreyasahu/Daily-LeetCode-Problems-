@@ -63,3 +63,32 @@ public:
         return ans;
     }
 };
+
+===========================================================================================================================
+
+class Solution {
+
+    void findSubset(int i, int l,int[] nums, List<Integer> list, Set<List<Integer>> anslist){
+        if(i==l){
+            anslist.add(new ArrayList<>(list));
+            return;
+        }
+         
+        findSubset(i+1,l,nums,list,anslist);
+        list.add(nums[i]);
+        findSubset(i+1,l,nums,list,anslist);
+        list.remove(list.size()-1);
+        
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        // Arrays.sort(nums);
+        int i=0,l=nums.length;
+        List<Integer> list = new ArrayList<>();
+        Set<List<Integer>> anslist= new HashSet<>();
+        findSubset(i,l,nums,list,anslist);
+        List<List<Integer>> ans = new ArrayList<>(anslist);
+        return ans;
+    }
+}
+
