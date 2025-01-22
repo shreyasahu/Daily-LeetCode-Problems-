@@ -45,3 +45,38 @@ public:
         return ans;
     }
 };
+
+---------------------------------------------------------
+
+JAVA CODE -
+
+class Solution {
+
+    void uniqueComb(int ind, int[] candidates, int target, int l, List<Integer> list, Set<List<Integer>> ans){
+            if(target == 0){
+                ans.add(new ArrayList<>(list));
+            return;
+        }
+       
+       for(int i=ind;i<l;i++){
+        if(i>ind && candidates[i]==candidates[i-1]) continue;
+        if(candidates[i]>target) break;
+        
+        list.add(candidates[i]);
+        uniqueComb(i+1,candidates,target-candidates[i],l,list,ans);
+        list.remove(list.size()-1);
+       }
+
+    }
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Set<List<Integer>> ans= new HashSet<>();
+        Arrays.sort(candidates);
+        uniqueComb(0,candidates,target,candidates.length,new ArrayList<>(),ans);
+        List<List<Integer>> anslist  = new ArrayList<>(ans);
+        return anslist;
+    }
+}
+
+
+--------------------------------------------------------------
