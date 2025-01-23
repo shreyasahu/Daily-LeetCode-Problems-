@@ -37,7 +37,12 @@ class Solution {
     public int calcProfit(int i, int indicator, int[] prices, int[][] dp) {
         if (i == prices.length) return 0;
         if (dp[i][indicator] != -1) return dp[i][indicator];
-        int buySell = (indicator == 1 ? prices[i] : -prices[i]) + calcProfit(i+1, indicator^1, prices, dp);
+           int buysell=0;
+        if(indicator==1){
+          buysell=prices[i]+calfn(i+1,0,prices,dp);      // int buySell = (indicator == 1? prices[i] : -prices[i]) + calfn(i+1,indicator^1,prices,dp);
+        }else{
+            buysell=-prices[i]+calfn(i+1,1,prices,dp);
+        }                                                   
         int skip = calcProfit(i+1, indicator, prices, dp);
         return dp[i][indicator] = Math.max(buySell, skip);
     }
