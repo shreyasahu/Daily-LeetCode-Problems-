@@ -1,0 +1,32 @@
+// https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+Left View of Binary Tree
+
+You are given the root of a binary tree. Your task is to return the left view of the binary tree. 
+The left view of a binary tree is the set of nodes visible when the tree is viewed from the left side.
+
+If the tree is empty, return an empty list.
+
+Input: root[] = [1, 2, 3, 4, 5, N, N]
+Output: [1, 2, 4]
+
+class Solution {
+    // Function to return list containing elements of left view of binary tree.
+    
+    ArrayList<Integer> findLeftView(int level,Node root, ArrayList<Integer> output){
+        if(root == null) return output;
+        if(output.size() == level){
+            output.add(root.data);
+        }
+        findLeftView(level+1, root.left, output);
+        findLeftView(level+1, root.right, output);
+        return output;
+        
+    }
+    
+    ArrayList<Integer> leftView(Node root) {
+        
+        ArrayList<Integer> output = new ArrayList<>();
+        return findLeftView(0, root, output);
+        
+    }
+}
