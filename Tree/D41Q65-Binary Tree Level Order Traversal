@@ -18,6 +18,99 @@ Example 3:
 Input: root = []
 Output: []
 
+JAVA SOLUTION -----
+
+Using queue -
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    public void findUsingQueue(TreeNode root, List<List<Integer>> ans){
+        if(root == null) return;
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            List<Integer> level = new ArrayList<>();
+            int n = q.size();
+            for(int i=0;i<n;i++){
+                TreeNode top = q.poll();
+                if(top.left != null){
+                    q.add(top.left);
+                }
+                if(top.right != null){
+                    q.add(top.right);
+                }
+                level.add(top.val);
+            }
+            ans.add(level);
+        }
+
+    }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        findUsingQueue(root, ans);
+        return ans;
+    }
+}
+
+
+RECURSIVE APPROACH --
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    public void findLevelOrder(int level, TreeNode root, List<List<Integer>> ans){
+        if(root==null) return;
+        if(level==ans.size()){
+            ans.add(new ArrayList<>());
+        }
+        ans.get(level).add(root.val);
+        findLevelOrder(level+1, root.left, ans);
+        findLevelOrder(level+1, root.right, ans);
+    }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        findLevelOrder(0, root, ans);
+        return ans;
+    }
+}
+
+
+
+-----------------------------------------------------------------------------------------------------
+C++ Solution -
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -29,6 +122,7 @@ Output: []
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
 
