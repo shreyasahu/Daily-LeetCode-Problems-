@@ -50,7 +50,7 @@ class Solution {
     }
 
     public boolean isSymmetric(TreeNode root) {
-       return isMirror(root, root);
+       return isMirror(root.left, root.right); // 1 hi root hai to use kyu compare krna , it will save space
     }
 }
 
