@@ -52,4 +52,37 @@ var twoSum = function(nums, target) {
    
 };
 
+--------------------------
+
+import java.util.HashMap;
+
+public class TwoSumSolution {
+    public static int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) { // Checking if target - nums[i] exists in the map
+                return new int[]{map.get(target - nums[i]), i}; // Returning the indices
+            }
+            map.put(nums[i], i); // Storing the number and its index
+        }
+        
+        return new int[]{}; // Returning an empty array if no solution is found
+    }
+    
+    public static void main(String[] args) {
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        int[] result = twoSum(nums, target);
+        
+        if (result.length == 2) {
+            System.out.println("Indices: " + result[0] + ", " + result[1]);
+        } else {
+            System.out.println("No solution found");
+        }
+    }
+}
+
+
+
 T.C.-O(n)
