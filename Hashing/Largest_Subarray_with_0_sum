@@ -1,0 +1,60 @@
+//https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1
+
+import java.util.*;
+
+
+public class Largest_Subarray_with_0_sum {
+
+    public static int LargestSubarray(int[] arr) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        int sum = 0, maxLength=0;
+
+        for(int i=0;i<arr.length;i++){
+
+            sum = sum + arr[i];
+            if(mp.containsKey(sum)){
+                maxLength = Math.max(i-mp.get(sum), maxLength);
+                mp.put(sum,Math.min(mp.get(sum),i));
+            } else if (sum == 0){
+                maxLength = i+1;
+            }
+
+            else {
+                mp.put(sum, i);
+            }
+
+        }
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+        int [] nums = {2,-2,1,1,-2,2,3};
+        System.out.println("Answer " +LargestSubarray(nums));
+    }
+}
+
+/*
+    15 - 0
+    13 - 1
+    15 - 2
+    7  - 3
+    8  - 4
+    15 - 5
+    25 - 6
+    48 - 7
+
+
+*/
+
+
+/*
+-31
+-79
+-169
+-115
+-95
+-89
+-3
+19
+
+ */
