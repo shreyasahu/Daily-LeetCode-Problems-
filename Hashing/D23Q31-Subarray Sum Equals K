@@ -102,6 +102,46 @@ now we need to increase the count of 14 means 14:2
 18:1 count=4
 20:1 
 21:1 
+
+
+JAVA SOLUTION --------------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Subarray_Sum_Equals_k {
+    public static int subarraySum(int[] nums, int k) {
+        Map<Integer,Integer> mp = new HashMap<>();
+        int sum = 0, count = 0;
+        for(int i=0;i<nums.length;i++){
+            sum = sum + nums[i];
+            if(mp.containsKey(sum-k)){
+                count+=mp.get(sum-k);
+            }
+            mp.put(sum, mp.getOrDefault(sum, 0)+1);
+
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int [] nums ={3,9,-2,4,1,-7};
+        int k = 5;
+        System.out.println(subarraySum(nums,k));
+    }
+}
+
+
+Time Complexity - O(N)
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 ------------------------------------------------------
 class Solution {
 public:
