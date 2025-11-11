@@ -128,5 +128,32 @@ class Solution {
     }
 }
 
+---------------------------------------------
 
+https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+Longest Substring Without Repeating Characters
+
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left=0, maxlen=0, len=s.length();
+        HashSet<Character> set = new HashSet<>();
+        for(int right=0;right<len;right++){
+            while(set.contains(s.charAt(right))){
+                set.remove(s.charAt(left));
+                left++;
+            }
+            set.add(s.charAt(right));
+            maxlen=Math.max(maxlen,right-left+1);
+        }
+        return maxlen;
+    }
+}
 
